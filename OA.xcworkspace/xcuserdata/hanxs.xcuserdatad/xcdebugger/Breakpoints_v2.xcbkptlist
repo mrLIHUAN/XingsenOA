@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OA/ViewController.swift"
+            timestampString = "485944964.340844"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
+            landmarkName = "SwiftCallJSLocation(_:longitude:positionInfo:status:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OA/ViewController.swift"
+            timestampString = "485937008.397235"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "JSCallSwiftWithDict(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OA/JSAndSwiftMiddle.swift"
+            timestampString = "485944621.370678"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "JSAndSwiftMiddle"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "OA.JSAndSwiftMiddle.jsContext.getter : weak Swift.Optional&lt;__ObjC.JSContext&gt;"
+                  moduleName = "OA"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hanxs/Desktop/OA/OA/JSAndSwiftMiddle.swift"
+                  timestampString = "485946402.460894"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "OA.JSAndSwiftMiddle.jsContext.setter : weak Swift.Optional&lt;__ObjC.JSContext&gt;"
+                  moduleName = "OA"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hanxs/Desktop/OA/OA/JSAndSwiftMiddle.swift"
+                  timestampString = "485946402.461152"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "28">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "OA.JSAndSwiftMiddle.jsContext.materializeForSet : weak Swift.Optional&lt;__ObjC.JSContext&gt;"
+                  moduleName = "OA"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hanxs/Desktop/OA/OA/JSAndSwiftMiddle.swift"
+                  timestampString = "485946402.461337"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "OA.JSAndSwiftMiddle.init (OA.JSAndSwiftMiddle.Type)() -&gt; OA.JSAndSwiftMiddle"
+                  moduleName = "OA"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hanxs/Desktop/OA/OA/JSAndSwiftMiddle.swift"
+                  timestampString = "485946402.461449"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "75"
+                  endingLineNumber = "75"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OA/JSAndSwiftMiddle.swift"
+            timestampString = "485944673.335134"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "callWithDict(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OA/ViewController.swift"
+            timestampString = "485946283.850116"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "action()"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "OA.ViewController.action (OA.ViewController)() -&gt; ()"
+                  moduleName = "OA"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hanxs/Desktop/OA/OA/ViewController.swift"
+                  timestampString = "485946402.463404"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "116"
+                  endingLineNumber = "116"
+                  offsetFromSymbolStart = "704">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "OA.ViewController.(action (OA.ViewController) -&gt; () -&gt; ()).(closure #1)"
+                  moduleName = "OA"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hanxs/Desktop/OA/OA/ViewController.swift"
+                  timestampString = "485946402.463555"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "117"
+                  endingLineNumber = "117"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
