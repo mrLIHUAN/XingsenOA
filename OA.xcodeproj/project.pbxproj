@@ -541,7 +541,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzkj.hanxs.xinsen1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/apple/Desktop/OA 2/OA/OA-Brigding-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/apple/Desktop/XingsenOA/OA/OA-Brigding-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -560,7 +560,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dzkj.hanxs.xinsen1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/apple/Desktop/OA 2/OA/OA-Brigding-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/apple/Desktop/XingsenOA/OA/OA-Brigding-Header.h";
 			};
 			name = Release;
 		};
