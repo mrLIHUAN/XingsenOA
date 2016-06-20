@@ -25,17 +25,9 @@ class NetWorkCore: NSObject {
                 Success(response1: JSON as! NSDictionary)
             }else{
                 fail(str: "获取app信息失败")
-                
             }
-            
         }
-        
     }
-    
-
-    
-    
-    
     
     class func upLoadWithURL(url : String, data : NSData ,success : (respones : NSDictionary)->(),fail:(str:String)->()) {
         

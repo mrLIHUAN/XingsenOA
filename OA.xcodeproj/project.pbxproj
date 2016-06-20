@@ -22,6 +22,9 @@
 		18A1BE2A1CEDADA900F7991C /* OAUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1BE291CEDADA900F7991C /* OAUITests.swift */; };
 		18A1BE3E1CEDC88700F7991C /* NetWorkCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1BE3D1CEDC88700F7991C /* NetWorkCore.swift */; };
 		18A1BE401CEEA6D500F7991C /* JSAndSwiftMiddle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1BE3F1CEEA6D500F7991C /* JSAndSwiftMiddle.swift */; };
+		18B6D26C1D17C1C800F00137 /* UIWebView+JavaScriptAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B6D26B1D17C1C800F00137 /* UIWebView+JavaScriptAlert.m */; };
+		18D5D6D51D12948600ADA181 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D5D6D41D12948600ADA181 /* Security.framework */; };
+		18D5D6DB1D12A9B500ADA181 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D5D6DA1D12A9B500ADA181 /* SSKeychain.m */; };
 		A447942F1C7155668C6B4FE1 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E841802ADBC83BA9965E28A4 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +71,12 @@
 		18A1BE3A1CEDB72100F7991C /* OA-Brigding-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OA-Brigding-Header.h"; sourceTree = "<group>"; };
 		18A1BE3D1CEDC88700F7991C /* NetWorkCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWorkCore.swift; sourceTree = "<group>"; };
 		18A1BE3F1CEEA6D500F7991C /* JSAndSwiftMiddle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSAndSwiftMiddle.swift; sourceTree = "<group>"; };
+		18B6D26A1D17C1C800F00137 /* UIWebView+JavaScriptAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+JavaScriptAlert.h"; sourceTree = "<group>"; };
+		18B6D26B1D17C1C800F00137 /* UIWebView+JavaScriptAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+JavaScriptAlert.m"; sourceTree = "<group>"; };
+		18D5D6D31D12929E00ADA181 /* OA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = OA.entitlements; sourceTree = "<group>"; };
+		18D5D6D41D12948600ADA181 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		18D5D6D91D12A9B500ADA181 /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
+		18D5D6DA1D12A9B500ADA181 /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
 		5A25EE5BE47E3F2BF1097882 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		788A64A6FA1BFD949D7DD3C4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E841802ADBC83BA9965E28A4 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18D5D6D51D12948600ADA181 /* Security.framework in Frameworks */,
 				1830477A1D0D663F00BE13F5 /* AdSupport.framework in Frameworks */,
 				A447942F1C7155668C6B4FE1 /* Pods.framework in Frameworks */,
 			);
@@ -125,6 +135,7 @@
 		18A1BDFD1CEDADA900F7991C = {
 			isa = PBXGroup;
 			children = (
+				18B6D2631D17BE0C00F00137 /* extension */,
 				183628641D0819E600EDB216 /* ConfigManage.swift */,
 				189150981D002A84000514A5 /* CNHUD */,
 				189150941D0029A8000514A5 /* netifusable */,
@@ -150,6 +161,9 @@
 		18A1BE081CEDADA900F7991C /* OA */ = {
 			isa = PBXGroup;
 			children = (
+				18D5D6D91D12A9B500ADA181 /* SSKeychain.h */,
+				18D5D6DA1D12A9B500ADA181 /* SSKeychain.m */,
+				18D5D6D31D12929E00ADA181 /* OA.entitlements */,
 				189150921D00291F000514A5 /* BaseViewController.swift */,
 				18A1BE3F1CEEA6D500F7991C /* JSAndSwiftMiddle.swift */,
 				18A1BE091CEDADA900F7991C /* AppDelegate.swift */,
@@ -182,6 +196,16 @@
 			path = OAUITests;
 			sourceTree = "<group>";
 		};
+		18B6D2631D17BE0C00F00137 /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				18B6D26A1D17C1C800F00137 /* UIWebView+JavaScriptAlert.h */,
+				18B6D26B1D17C1C800F00137 /* UIWebView+JavaScriptAlert.m */,
+			);
+			name = extension;
+			path = OA/extension;
+			sourceTree = "<group>";
+		};
 		24FAD70E6DD7A34A670BBCF4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +218,7 @@
 		A4BE6CE09B6C0DFA3E4F3DB9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18D5D6D41D12948600ADA181 /* Security.framework */,
 				183047791D0D663F00BE13F5 /* AdSupport.framework */,
 				E841802ADBC83BA9965E28A4 /* Pods.framework */,
 			);
@@ -272,6 +297,11 @@
 					18A1BE051CEDADA900F7991C = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 9ZTGTLM36Q;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+						};
 					};
 					18A1BE191CEDADA900F7991C = {
 						CreatedOnToolsVersion = 7.2;
@@ -390,8 +420,10 @@
 				18A1BE401CEEA6D500F7991C /* JSAndSwiftMiddle.swift in Sources */,
 				183628651D0819E600EDB216 /* ConfigManage.swift in Sources */,
 				18A1BE0C1CEDADA900F7991C /* ViewController.swift in Sources */,
+				18B6D26C1D17C1C800F00137 /* UIWebView+JavaScriptAlert.m in Sources */,
 				189150971D0029A8000514A5 /* Reachability.m in Sources */,
 				18A1BE0A1CEDADA900F7991C /* AppDelegate.swift in Sources */,
+				18D5D6DB1D12A9B500ADA181 /* SSKeychain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

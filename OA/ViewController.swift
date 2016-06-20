@@ -13,8 +13,7 @@ import JavaScriptCore
 import AVFoundation
 import AdSupport
 import MBProgressHUD
-
-
+import Security
 
 class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,JSAndSwiftModdleDelegate,AMapLocationManagerDelegate{
 
@@ -46,11 +45,18 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
         
         
         
+        //通知--已获得html字符串，并把字符串传过来
+//        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(callUNHtml:) name:@"tongzhi" object:nil];
+        
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "action", name: "tongzhi", object: nil)
+
+        
 //        let phoneModel = UIDevice.currentDevice().model
 //        let ddd = UIDevice.currentDevice().identifierForVendor
 //        print("+++\(phoneModel),\(ddd)")
         
-        
+//        let adUUID = getUUID()
 
 
     }
@@ -89,6 +95,7 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
         webView.scalesPageToFit = false
         webView.scrollView.bounces = false
         webView.delegate = self
+        
         self.view .addSubview(webView)
         
         //http://192.168.1.39:9998/pda/
@@ -117,6 +124,7 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
 //        NSURLCache .sharedURLCache().removeAllCachedResponses()
 //        NSURLCache.sharedURLCache().diskCapacity = 0
 //        NSURLCache.sharedURLCache().memoryCapacity = 0
+        
         webView.loadRequest(urlRequest)
         
         
@@ -143,13 +151,10 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
             HUD = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
             HUD.mode = MBProgressHUDMode.Indeterminate
             HUD.labelText = "顾客为先 快速高效"
-
         }
         
         if _isNetOK {
 //            indicatorView.startAnimating()
-            
-           
             HUD.show(true)
         }else{
             CNHUD.showHUD("网络异常，请检查网络设置！", duration: 1.5)
@@ -206,7 +211,6 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
             
             let tel = "telprompt://" + number
             //从这拨打电话
-            
             UIApplication.sharedApplication().openURL(NSURL(string: tel)!)
         
         }else if (type == "4"){
@@ -231,7 +235,6 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
                 if (error != nil) {
                     
                   self!.SwiftCallJSLocation("", longitude: "", positionInfo:"",status: "0")
-                    print(error)
                     
                 }else{
                 
@@ -360,15 +363,23 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
     /**Swift调用JS--定位信息*/
     func SwiftCallJSLocation(latitude : String ,longitude : String,positionInfo : String ,status : String){
         
-        let jsParamFunc = self.jscontext?.objectForKeyedSubscript("getUserGroundInfo")
-        let dict = NSDictionary(dictionary: ["latitude" : latitude,"longitude" : longitude,"positionInfo" : positionInfo,"status" : status])
+        let adUUID = getUUID()
+        
+        let Mark = getDeviceVersion()
+        var sss = "0"
+        if((adUUID as NSString).length > 0 && (Mark as NSString).length > 0){
+            
+            sss = "1"
+        }
+        let jsParamFunc = self.jscontext?.objectForKeyedSubscript("\(getlocationInfo)")
+        let dict = NSDictionary(dictionary: ["latitude" : latitude,"longitude" : longitude,"positionInfo" : positionInfo,"status" : status,"IMEI" : adUUID,"DeviceVersion" : Mark])
         let dictString = dictionaryToJson(dict)
         jsParamFunc?.callWithArguments([dictString])
     }
     /**Swift调用JS--照片连接*/
     func SwiftCallJSCamera(imgUrl : String, result : String){
         
-        let jsParamFunc = self.jscontext?.objectForKeyedSubscript("getUserImgUrl")
+        let jsParamFunc = self.jscontext?.objectForKeyedSubscript("\(getUserImgUrl)")
         let dict = NSDictionary(dictionary: ["imgUrl" : imgUrl,"result" : result])
         let dictSting = dictionaryToJson(dict)
         jsParamFunc?.callWithArguments([dictSting])
@@ -386,15 +397,10 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
             sss = "1"
         }
         
-        let jsParamFunc = self.jscontext?.objectForKeyedSubscript("getapptype")
+        let jsParamFunc = self.jscontext?.objectForKeyedSubscript("\(getDevicetype)")
         let dict = NSDictionary(dictionary: ["IMEI" : adUUID,"DeviceVersion" : Mark,"status" : sss ])
         let dictSting = dictionaryToJson(dict)
         jsParamFunc?.callWithArguments([dictSting])
-        
-        
-        
-        
-    
         
     }
     
@@ -406,7 +412,6 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
         let JSONData = JSONString .dataUsingEncoding(NSUTF8StringEncoding)
         
         let responseJSON = try! NSJSONSerialization .JSONObjectWithData(JSONData!, options: NSJSONReadingOptions.MutableLeaves) as! NSDictionary
-        
         return responseJSON
     }
     /**字典转JSON字符串*/
@@ -431,29 +436,60 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
     func amapLocationManager(manager: AMapLocationManager!, didUpdateLocation location: CLLocation!) {
         print(location)
         //根据经纬度发起一次逆地理编码（又是一次请求）
-        
     }
     
     
     func getUUID()->String{
+
+        
+        let UUIDDate = SSKeychain.passwordDataForService("\(BundleID)", account: "\(BundleID)")
+        
+    
+        var UUID : NSString!
+        if UUIDDate != nil{
+        
+             UUID = NSString(data: UUIDDate, encoding: NSUTF8StringEncoding)
+        }
+        
+    
+        if(UUID == nil){
+            
+            UUID = UIDevice.currentDevice().identifierForVendor?.UUIDString
+            
+            
+            SSKeychain.setPassword(UUID as String, forService: "com.dzkj.hanxs.xinsen1", account: "com.dzkj.hanxs.xinsen1")
+            
+        }
+        
 //        let puuid = CFUUIDCreate(nil)
 //        let uuidString = CFUUIDCreateString(nil, puuid)
-//        
+////
 //        let result = CFStringCreateCopy(nil, uuidString) as NSString
+////
+        print("=====\(UUID)")
+////
+////
+//        let adid = ASIdentifierManager.sharedManager().advertisingIdentifier.UUIDString
 //        
-//        print("=====\(result)")
+//        print("+++\(adid)")
         
         
-        let adid = ASIdentifierManager.sharedManager().advertisingIdentifier.UUIDString
         
-        print("+++\(adid)")
-        
-        return adid
+        return UUID as String
 
 
     
     }
     
+    
+    
+    
+    deinit{
+    
+    
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "tongzhi", object: nil)
+    
+    }
     
     func getDeviceVersion()->String{
         
