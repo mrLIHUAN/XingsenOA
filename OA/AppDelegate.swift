@@ -15,7 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UIAlertViewDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        
 //        MAMapServices.sharedServices().apiKey = ""
 //        AMapSearchServices.sharedServices().apiKey = ""
         
@@ -37,7 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UIAlertViewDelegate {
         if isCheckUpIsNew{
             checkUpIsNew()
         }
-        
         // Override point for customization after application launch.
         return true
     }

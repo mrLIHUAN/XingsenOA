@@ -25,6 +25,7 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
     
     var _isNetOK : Bool = true
     
+    var locationDic : NSDictionary!
     //大菊花
 //    var indicatorView = UIActivityIndicatorView()
     
@@ -43,27 +44,18 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
         /**创建WebView*/
         creatWebView()
         
-        
-        
         //通知--已获得html字符串，并把字符串传过来
 //        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(callUNHtml:) name:@"tongzhi" object:nil];
         
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "action", name: "tongzhi", object: nil)
-
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "clickDetermine", name: "tongzhi", object: nil)
         
 //        let phoneModel = UIDevice.currentDevice().model
 //        let ddd = UIDevice.currentDevice().identifierForVendor
 //        print("+++\(phoneModel),\(ddd)")
         
 //        let adUUID = getUUID()
-
-
     }
-    
-    
-    
-    
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -74,22 +66,16 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
         
         if (usableordisusable){
             _isNetOK = true
-           
-        
         }else{
-            
             _isNetOK = false
             CNHUD.showHUD("网络异常，请检查网络设置！", duration: 1.5)
-        
         }
-        
-        
-        
     }
     //创建WebView
     func creatWebView(){
         
         webView = UIWebView(frame: CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.height - 20))
+        
         webView.backgroundColor = UIColor.whiteColor()
         webView.userInteractionEnabled = true
         webView.scalesPageToFit = false
@@ -107,10 +93,10 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
         
         let url : NSURL!
         if(NSUserDefaults.standardUserDefaults().objectForKey("userName") != nil){
-        
+            
             let userName = NSUserDefaults.standardUserDefaults().objectForKey("userName") as! String
             let pwd      = NSUserDefaults.standardUserDefaults().objectForKey("pwd") as! String
-    
+            
             url = NSURL(string: String(format: "\(GLOBAL_IPADDRESS_API)/pda/default.aspx?userName=%@&pwd=%@",userName,pwd))
             
         }else{
@@ -130,11 +116,7 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
         
         
         //大菊花的创建
-        
-        
-
-        
-        
+    
 //        indicatorView.frame = CGRectMake(0, 0, 100, 100)
 //        indicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
 //        indicatorView.backgroundColor = UIColor.grayColor()
@@ -151,11 +133,12 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
             HUD = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
             HUD.mode = MBProgressHUDMode.Indeterminate
             HUD.labelText = "顾客为先 快速高效"
+            
         }
-        
         if _isNetOK {
 //            indicatorView.startAnimating()
             HUD.show(true)
+            
         }else{
             CNHUD.showHUD("网络异常，请检查网络设置！", duration: 1.5)
         }
@@ -167,9 +150,7 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
             HUD.hide(true)
         }
         HUD = nil
-        
-        
-    webView.stringByEvaluatingJavaScriptFromString("document.documentElement.style.webkitUserSelect='none';")
+//    webView.stringByEvaluatingJavaScriptFromString("document.documentElement.style.webkitUserSelect='none';")
         
         if(isCallJS == "1" ){
             // 初始化model
@@ -193,9 +174,9 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
     //MARK: JSAndSwiftModdleDelegate
     func JSCallSwiftWithDict(params : NSString) {
         
-        let dic = parseJSONStringToNSDictionary(params as String)
+        let paramsDic = parseJSONStringToNSDictionary(params as String)
 
-        let type = dic.objectForKey("type") as! String
+        let type = paramsDic.objectForKey("type") as! String
         
         if type == "0" {
             
@@ -207,7 +188,7 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
              SystemCamera()
         }else if (type == "3" ){
             
-            let number = dic.objectForKey("number") as! String
+            let number = paramsDic.objectForKey("number") as! String
             
             let tel = "telprompt://" + number
             //从这拨打电话
@@ -215,16 +196,14 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
         
         }else if (type == "4"){
             
-            let userName = dic.objectForKey("userName") as! String
-            let pwd      = dic.objectForKey("pwd") as! String
+            let userName = paramsDic.objectForKey("userName") as! String
+            let pwd      = paramsDic.objectForKey("pwd") as! String
             
             
             NSUserDefaults.standardUserDefaults().setObject(userName, forKey: "userName")
             NSUserDefaults.standardUserDefaults().setObject(pwd, forKey: "pwd")
         }else if (type == "5"){
-            
             SwiftCallJSMarkAndId()
-            
         }
     }
     // 定位
@@ -272,7 +251,6 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
             let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: { (action:UIAlertAction) -> Void in
             })
             
-
             Alert.addAction(cancelAction)
             Alert.addAction(okAction)
             
@@ -366,15 +344,19 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
         let adUUID = getUUID()
         
         let Mark = getDeviceVersion()
+        
         var sss = "0"
+        
         if((adUUID as NSString).length > 0 && (Mark as NSString).length > 0){
             
             sss = "1"
         }
+        
         let jsParamFunc = self.jscontext?.objectForKeyedSubscript("\(getlocationInfo)")
-        let dict = NSDictionary(dictionary: ["latitude" : latitude,"longitude" : longitude,"positionInfo" : positionInfo,"status" : status,"IMEI" : adUUID,"DeviceVersion" : Mark])
-        let dictString = dictionaryToJson(dict)
+        locationDic = NSDictionary(dictionary: ["latitude" : latitude,"longitude" : longitude,"positionInfo" : positionInfo,"status" : status,"IMEI" : adUUID,"DeviceVersion" : Mark])
+        let dictString = dictionaryToJson(locationDic)
         jsParamFunc?.callWithArguments([dictString])
+        
     }
     /**Swift调用JS--照片连接*/
     func SwiftCallJSCamera(imgUrl : String, result : String){
@@ -393,27 +375,24 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
         let Mark = getDeviceVersion()
         var sss = "0"
         if((adUUID as NSString).length > 0 && (Mark as NSString).length > 0){
-        
+
             sss = "1"
+            
         }
-        
         let jsParamFunc = self.jscontext?.objectForKeyedSubscript("\(getDevicetype)")
         let dict = NSDictionary(dictionary: ["IMEI" : adUUID,"DeviceVersion" : Mark,"status" : sss ])
         let dictSting = dictionaryToJson(dict)
         jsParamFunc?.callWithArguments([dictSting])
-        
     }
-    
-    
     
     /**JSON字符串转字典*/
     func parseJSONStringToNSDictionary(JSONString : String)->NSDictionary{
         
         let JSONData = JSONString .dataUsingEncoding(NSUTF8StringEncoding)
-        
         let responseJSON = try! NSJSONSerialization .JSONObjectWithData(JSONData!, options: NSJSONReadingOptions.MutableLeaves) as! NSDictionary
         return responseJSON
     }
+    
     /**字典转JSON字符串*/
     func dictionaryToJson(dic : NSDictionary)->String {
         let JSONdata = try! NSJSONSerialization .dataWithJSONObject(dic, options: NSJSONWritingOptions.PrettyPrinted)
@@ -441,54 +420,35 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
     
     func getUUID()->String{
 
-        
         let UUIDDate = SSKeychain.passwordDataForService("\(BundleID)", account: "\(BundleID)")
         
-    
         var UUID : NSString!
+        
         if UUIDDate != nil{
         
              UUID = NSString(data: UUIDDate, encoding: NSUTF8StringEncoding)
         }
-        
-    
         if(UUID == nil){
             
             UUID = UIDevice.currentDevice().identifierForVendor?.UUIDString
-            
-            
-            SSKeychain.setPassword(UUID as String, forService: "com.dzkj.hanxs.xinsen1", account: "com.dzkj.hanxs.xinsen1")
-            
+            SSKeychain.setPassword(UUID as String, forService: "\(BundleID)", account: "\(BundleID)")
         }
-        
-//        let puuid = CFUUIDCreate(nil)
-//        let uuidString = CFUUIDCreateString(nil, puuid)
-////
-//        let result = CFStringCreateCopy(nil, uuidString) as NSString
-////
+    
         print("=====\(UUID)")
-////
-////
-//        let adid = ASIdentifierManager.sharedManager().advertisingIdentifier.UUIDString
-//        
-//        print("+++\(adid)")
-        
-        
         
         return UUID as String
-
-
-    
     }
     
-    
-    
-    
+    /**点击弹出来alert框点击确定时走此方法*/
+    func clickDetermine(){
+        
+        let jsParamFunc = self.jscontext?.objectForKeyedSubscript("getUserGroundInfo2")
+        let dictString = dictionaryToJson(locationDic)
+        jsParamFunc?.callWithArguments([dictString])
+    }
     deinit{
-    
-    
+        
         NSNotificationCenter.defaultCenter().removeObserver(self, name: "tongzhi", object: nil)
-    
     }
     
     func getDeviceVersion()->String{
@@ -498,9 +458,8 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
         uname(&systemInfo)
         
         let deviceString = withUnsafePointer(&systemInfo.machine) { (ASCIIChar) -> String in
-            
+
             return String.fromCString(UnsafePointer<CChar>(ASCIIChar))!
-            
         }
         let deviceType = ["iPhone1,1" :  "iPhone",
             "iPhone1,2" :  "iPhone3G",
@@ -519,7 +478,7 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
             "iPhone7,1" :  "iPhone6 Plus",
             "iPhone8,1" :  "iPhone6s",
             "iPhone8,2" :  "iPhone6s Plus",
-            "iPhone8,4" :  "iPhone5SE",
+            "iPhone8,4" :  "iPhoneSE",
             "iPod1,1"   :  "iPod touch",
             "iPod2,1"   :  "iPod touch 2G",
             "iPod3,1"   :  "iPod touch 3G",

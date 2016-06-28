@@ -15,14 +15,12 @@ class BaseViewController: UIViewController {
     var netWorkStateInBase = false
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewDidAppear(animated: Bool) {
         autonetwork()
         netWorkStateInBase = checkNetworkStatus()
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

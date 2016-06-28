@@ -35,7 +35,6 @@ class NetWorkCore: NSObject {
             
             data1 .appendBodyPart(data: data, name: "file", fileName: "fileName.png", mimeType:"image/png")
             
-            
             }) { (result) -> Void in
                 
                 switch result {

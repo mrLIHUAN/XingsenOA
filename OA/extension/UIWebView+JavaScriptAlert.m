@@ -13,49 +13,48 @@
 
 -(void)webView:(UIWebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(id)frame{
     UIAlertView* dialogue = [[UIAlertView alloc]initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
-    [dialogue show];;
+    [dialogue show];
 }
 
 static BOOL diagStat = NO;
 static BOOL sic = NO;
 
 - (BOOL)webView:(UIWebView *)sender runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(id)frame {
-    
-    if (!sic) {
-        UIAlertView *confirmDiag = [[UIAlertView alloc] initWithTitle:@"助手提示"
-                                                              message:message
-                                                             delegate:self
-                                                    cancelButtonTitle:@"取消"
-                                                    otherButtonTitles:@"确定",nil];
-        
-        [confirmDiag show];
-
-    }else{
-    
-     return sic;
-    }
-    
+    UIAlertView *confirmDiag;
+//    if (message.length != 0 && sic) {
+//        confirmDiag = [[UIAlertView alloc] initWithTitle:@"助手提示"
+//                                                 message:message
+//                                                delegate:self
+//                                       cancelButtonTitle:@"取消"
+//                                       otherButtonTitles:@"确定",nil];
+//        [confirmDiag show];
+//    }
+//    if (!sic) {
+        confirmDiag = [[UIAlertView alloc] initWithTitle:@"助手提示"
+                                                 message:message
+                                                delegate:self
+                                       cancelButtonTitle:@"取消"
+                                       otherButtonTitles:@"确定",nil];
+         [confirmDiag show];
+//    }
     
     return diagStat;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-//    bIdx = buttonIndex;
+
     if (buttonIndex == 0) {
-        
         diagStat = NO;
-        
+
     }else if(buttonIndex == 1){
         
-        diagStat = YES;
-        sic = YES;
         
+        UIButton *btn = [[UIButton alloc]init];
+        
+//        diagStat = YES;
+//        sic = YES;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"tongzhi" object:nil];
-    
     }
-    
-    
-    
 }
 //-(BOOL)isDiagStat{
 //    

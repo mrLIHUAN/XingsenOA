@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UIWebView (JavaScriptAlert)<UIAlertViewDelegate>
-@property(nonatomic,strong)UIAlertView *confirmDiag;
 
 -(void)webView:(UIWebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(id)frame;
 
