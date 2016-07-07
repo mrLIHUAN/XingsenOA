@@ -11,7 +11,7 @@ import UIKit
 //                测试：http://183.62.9.226:2002
 
 //"http://192.168.1.39:1000"
-let GLOBAL_IPADDRESS_API = "http://183.62.9.226:2001"
+let GLOBAL_IPADDRESS_API = "http://192.168.1.39:1000"
 
 
 //这是正式库的检测更新   ["shortcut":"H01U","_api_key":"168f7331368cfabd37b093cbb3103db1"]
@@ -25,7 +25,7 @@ let GLOBAL_Api_Key            = "168f7331368cfabd37b093cbb3103db1"
 */
 //测试：55807fb165970e1d37da7429fce4dec5
 //正式：7b380a54dbc5bad9df10c7d101d59ed7
-let GAODE_MAP_APPKEY = "7b380a54dbc5bad9df10c7d101d59ed7"
+let GAODE_MAP_APPKEY = "55807fb165970e1d37da7429fce4dec5"
 
 //http://www.pgyer.com/apiv1/app/getAppKeyByShortcut
 /*
@@ -42,7 +42,7 @@ let isCallJS = "1"
 /*
 是否需要检查更新 true 
 */
-let isCheckUpIsNew = true
+let isCheckUpIsNew = false
 
 
 //(此处必须写成这样因为我不想改里面😊😊😊😊😊😊😊😊😊😊😊😊😊😊😊😊)

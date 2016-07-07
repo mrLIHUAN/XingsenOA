@@ -1,16 +1,19 @@
 PODS:
   - Alamofire (3.1.5)
   - AMapLocation (1.1.1)
+  - AMapSearch (3.2.0)
   - MBProgressHUD (0.9.2)
 
 DEPENDENCIES:
   - Alamofire (~> 3.1.5)
   - AMapLocation (~> 1.1.1)
+  - AMapSearch (~> 3.2.0)
   - MBProgressHUD (~> 0.9.1)
 
 SPEC CHECKSUMS:
   Alamofire: 5f730ba29fd113b7ddd71c1e65d0c630acf5d7b0
   AMapLocation: fc0245146ef90811f9590d428e9035a2a64f4526
+  AMapSearch: a885f0702578a441a22cb66fa74f8918c6d19e6f
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
 
 COCOAPODS: 0.39.0

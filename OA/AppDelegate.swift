@@ -18,9 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UIAlertViewDelegate {
 //        MAMapServices.sharedServices().apiKey = ""
 //        AMapSearchServices.sharedServices().apiKey = ""
         
-        AMapLocationServices.sharedServices().apiKey = GAODE_MAP_APPKEY
-
+        //AMapLocationServices.sharedServices().apiKey = GAODE_MAP_APPKE
         
+        
+        AMapSearchServices.sharedServices().apiKey = GAODE_MAP_APPKEY
+        AMapLocationServices.sharedServices().apiKey = GAODE_MAP_APPKEY
+        
+
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
         self.window?.backgroundColor = UIColor.whiteColor()
@@ -36,6 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UIAlertViewDelegate {
         if isCheckUpIsNew{
             checkUpIsNew()
         }
+        
+        
         // Override point for customization after application launch.
         return true
     }

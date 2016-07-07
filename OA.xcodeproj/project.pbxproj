@@ -9,10 +9,13 @@
 /* Begin PBXBuildFile section */
 		1830477A1D0D663F00BE13F5 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183047791D0D663F00BE13F5 /* AdSupport.framework */; };
 		183628651D0819E600EDB216 /* ConfigManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183628641D0819E600EDB216 /* ConfigManage.swift */; };
+		183C79251D2642F800441DDE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C79241D2642F800441DDE /* TestViewController.swift */; };
 		189150931D00291F000514A5 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189150921D00291F000514A5 /* BaseViewController.swift */; };
 		189150971D0029A8000514A5 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 189150961D0029A8000514A5 /* Reachability.m */; };
 		1891509B1D002A84000514A5 /* CNHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891509A1D002A84000514A5 /* CNHUD.m */; };
 		1891509E1D002AB7000514A5 /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891509D1D002AB7000514A5 /* UIViewExt.m */; };
+		189B01471D2BA081007C2650 /* MyDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189B01461D2BA081007C2650 /* MyDateExtension.swift */; };
+		189B01491D2BA148007C2650 /* MyStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189B01481D2BA148007C2650 /* MyStringExtension.swift */; };
 		18A1BE0A1CEDADA900F7991C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1BE091CEDADA900F7991C /* AppDelegate.swift */; };
 		18A1BE0C1CEDADA900F7991C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1BE0B1CEDADA900F7991C /* ViewController.swift */; };
 		18A1BE0F1CEDADA900F7991C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18A1BE0D1CEDADA900F7991C /* Main.storyboard */; };
@@ -48,6 +51,7 @@
 /* Begin PBXFileReference section */
 		183047791D0D663F00BE13F5 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		183628641D0819E600EDB216 /* ConfigManage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigManage.swift; sourceTree = "<group>"; };
+		183C79241D2642F800441DDE /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		189150921D00291F000514A5 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		189150951D0029A8000514A5 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		189150961D0029A8000514A5 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -55,6 +59,8 @@
 		1891509A1D002A84000514A5 /* CNHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNHUD.m; sourceTree = "<group>"; };
 		1891509C1D002AB7000514A5 /* UIViewExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewExt.h; sourceTree = "<group>"; };
 		1891509D1D002AB7000514A5 /* UIViewExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewExt.m; sourceTree = "<group>"; };
+		189B01461D2BA081007C2650 /* MyDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDateExtension.swift; sourceTree = "<group>"; };
+		189B01481D2BA148007C2650 /* MyStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStringExtension.swift; sourceTree = "<group>"; };
 		18A1BE061CEDADA900F7991C /* OA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A1BE091CEDADA900F7991C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18A1BE0B1CEDADA900F7991C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -168,6 +174,7 @@
 				18A1BE3F1CEEA6D500F7991C /* JSAndSwiftMiddle.swift */,
 				18A1BE091CEDADA900F7991C /* AppDelegate.swift */,
 				18A1BE0B1CEDADA900F7991C /* ViewController.swift */,
+				183C79241D2642F800441DDE /* TestViewController.swift */,
 				18A1BE3D1CEDC88700F7991C /* NetWorkCore.swift */,
 				18A1BE3A1CEDB72100F7991C /* OA-Brigding-Header.h */,
 				18A1BE0D1CEDADA900F7991C /* Main.storyboard */,
@@ -201,6 +208,8 @@
 			children = (
 				18B6D26A1D17C1C800F00137 /* UIWebView+JavaScriptAlert.h */,
 				18B6D26B1D17C1C800F00137 /* UIWebView+JavaScriptAlert.m */,
+				189B01461D2BA081007C2650 /* MyDateExtension.swift */,
+				189B01481D2BA148007C2650 /* MyStringExtension.swift */,
 			);
 			name = extension;
 			path = OA/extension;
@@ -298,6 +307,9 @@
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 9ZTGTLM36Q;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Keychain = {
 								enabled = 0;
 							};
@@ -413,7 +425,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				189B01491D2BA148007C2650 /* MyStringExtension.swift in Sources */,
 				1891509E1D002AB7000514A5 /* UIViewExt.m in Sources */,
+				189B01471D2BA081007C2650 /* MyDateExtension.swift in Sources */,
 				189150931D00291F000514A5 /* BaseViewController.swift in Sources */,
 				1891509B1D002A84000514A5 /* CNHUD.m in Sources */,
 				18A1BE3E1CEDC88700F7991C /* NetWorkCore.swift in Sources */,
@@ -423,6 +437,7 @@
 				18B6D26C1D17C1C800F00137 /* UIWebView+JavaScriptAlert.m in Sources */,
 				189150971D0029A8000514A5 /* Reachability.m in Sources */,
 				18A1BE0A1CEDADA900F7991C /* AppDelegate.swift in Sources */,
+				183C79251D2642F800441DDE /* TestViewController.swift in Sources */,
 				18D5D6DB1D12A9B500ADA181 /* SSKeychain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

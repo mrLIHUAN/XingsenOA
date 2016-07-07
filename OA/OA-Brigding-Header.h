@@ -19,5 +19,7 @@
 
 #import "MBProgressHUD/MBProgressHUD.h"
 
+//#import "AMapFoundationKit/AMapFoundationKit.h"
+#import "AMapSearchKit/AMapSearchKit.h"
 
 #endif /* OA_Brigding_Header_h */

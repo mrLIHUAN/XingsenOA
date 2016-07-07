@@ -17,7 +17,7 @@ class NetWorkCore: NSObject {
         
         Alamofire.request(.POST, url, parameters: parameters, encoding: ParameterEncoding.URL, headers: nil).responseJSON { response -> Void in
             
-            print("\(response)")
+
             
             
             if let JSON = response.result.value {
