@@ -19,6 +19,9 @@
 
 #import "MBProgressHUD/MBProgressHUD.h"
 
+//Ping 网络
+#import "SimplePingHelper.h"
+
 //#import "AMapFoundationKit/AMapFoundationKit.h"
 #import "AMapSearchKit/AMapSearchKit.h"
 

@@ -10,6 +10,9 @@
 		1830477A1D0D663F00BE13F5 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183047791D0D663F00BE13F5 /* AdSupport.framework */; };
 		183628651D0819E600EDB216 /* ConfigManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183628641D0819E600EDB216 /* ConfigManage.swift */; };
 		183C79251D2642F800441DDE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C79241D2642F800441DDE /* TestViewController.swift */; };
+		1874CD4E1D371CC200ECF939 /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1874CD4B1D371CC200ECF939 /* SimplePing.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1874CD4F1D371CC200ECF939 /* SimplePingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1874CD4D1D371CC200ECF939 /* SimplePingHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1874CD511D37711B00ECF939 /* PingNetTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1874CD501D37711B00ECF939 /* PingNetTool.swift */; };
 		189150931D00291F000514A5 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189150921D00291F000514A5 /* BaseViewController.swift */; };
 		189150971D0029A8000514A5 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 189150961D0029A8000514A5 /* Reachability.m */; };
 		1891509B1D002A84000514A5 /* CNHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891509A1D002A84000514A5 /* CNHUD.m */; };
@@ -52,6 +55,11 @@
 		183047791D0D663F00BE13F5 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		183628641D0819E600EDB216 /* ConfigManage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigManage.swift; sourceTree = "<group>"; };
 		183C79241D2642F800441DDE /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		1874CD4A1D371CC200ECF939 /* SimplePing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePing.h; sourceTree = "<group>"; };
+		1874CD4B1D371CC200ECF939 /* SimplePing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplePing.m; sourceTree = "<group>"; };
+		1874CD4C1D371CC200ECF939 /* SimplePingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePingHelper.h; sourceTree = "<group>"; };
+		1874CD4D1D371CC200ECF939 /* SimplePingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplePingHelper.m; sourceTree = "<group>"; };
+		1874CD501D37711B00ECF939 /* PingNetTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingNetTool.swift; sourceTree = "<group>"; };
 		189150921D00291F000514A5 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		189150951D0029A8000514A5 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		189150961D0029A8000514A5 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -116,11 +124,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1874CD491D371CC200ECF939 /* SimplePing */ = {
+			isa = PBXGroup;
+			children = (
+				1874CD4A1D371CC200ECF939 /* SimplePing.h */,
+				1874CD4B1D371CC200ECF939 /* SimplePing.m */,
+				1874CD4C1D371CC200ECF939 /* SimplePingHelper.h */,
+				1874CD4D1D371CC200ECF939 /* SimplePingHelper.m */,
+			);
+			name = SimplePing;
+			path = OA/SimplePing;
+			sourceTree = "<group>";
+		};
 		189150941D0029A8000514A5 /* netifusable */ = {
 			isa = PBXGroup;
 			children = (
 				189150951D0029A8000514A5 /* Reachability.h */,
 				189150961D0029A8000514A5 /* Reachability.m */,
+				1874CD501D37711B00ECF939 /* PingNetTool.swift */,
 			);
 			name = netifusable;
 			path = OA/netifusable;
@@ -141,6 +162,7 @@
 		18A1BDFD1CEDADA900F7991C = {
 			isa = PBXGroup;
 			children = (
+				1874CD491D371CC200ECF939 /* SimplePing */,
 				18B6D2631D17BE0C00F00137 /* extension */,
 				183628641D0819E600EDB216 /* ConfigManage.swift */,
 				189150981D002A84000514A5 /* CNHUD */,
@@ -427,8 +449,11 @@
 			files = (
 				189B01491D2BA148007C2650 /* MyStringExtension.swift in Sources */,
 				1891509E1D002AB7000514A5 /* UIViewExt.m in Sources */,
+				1874CD511D37711B00ECF939 /* PingNetTool.swift in Sources */,
 				189B01471D2BA081007C2650 /* MyDateExtension.swift in Sources */,
+				1874CD4E1D371CC200ECF939 /* SimplePing.m in Sources */,
 				189150931D00291F000514A5 /* BaseViewController.swift in Sources */,
+				1874CD4F1D371CC200ECF939 /* SimplePingHelper.m in Sources */,
 				1891509B1D002A84000514A5 /* CNHUD.m in Sources */,
 				18A1BE3E1CEDC88700F7991C /* NetWorkCore.swift in Sources */,
 				18A1BE401CEEA6D500F7991C /* JSAndSwiftMiddle.swift in Sources */,

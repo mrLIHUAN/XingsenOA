@@ -41,7 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UIAlertViewDelegate {
             checkUpIsNew()
         }
         
-        
         // Override point for customization after application launch.
         return true
     }

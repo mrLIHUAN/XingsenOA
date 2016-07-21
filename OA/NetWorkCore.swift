@@ -17,11 +17,7 @@ class NetWorkCore: NSObject {
         
         Alamofire.request(.POST, url, parameters: parameters, encoding: ParameterEncoding.URL, headers: nil).responseJSON { response -> Void in
             
-
-            
-            
             if let JSON = response.result.value {
-                
                 Success(response1: JSON as! NSDictionary)
             }else{
                 fail(str: "获取app信息失败")
@@ -80,6 +76,7 @@ class NetWorkCore: NSObject {
         }
     }
     
+ 
     /**JSON字符串转字典*/
     class func parseJSONStringToNSDictionary(JSONString : String)->NSDictionary{
         

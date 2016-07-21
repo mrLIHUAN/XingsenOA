@@ -26,6 +26,7 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
     
     var _isNetOK : Bool = true
     
+    
     var timer : NSTimer!
     
     var locationDic : NSDictionary!
@@ -44,6 +45,8 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
     var currentCoordinate : CLLocationCoordinate2D!
     
     var pastDate : NSDate!
+    
+    var CenterAlertView : UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -61,16 +64,15 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
 //        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(callUNHtml:) name:@"tongzhi" object:nil];
         
         
+
 //        getCurrentTime()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "clickDetermine", name: "tongzhi", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "becomeActive", name: UIApplicationDidBecomeActiveNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "becomeDeath", name: UIApplicationWillResignActiveNotification, object: nil)
-        
-        
     }
     /**
-     从后台进前台
+     从后台进前台这个问题是解决程序推到后台时间长点击没有反应
      */
     func becomeActive(){
     
@@ -83,7 +85,6 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
             DurationTime = nowDate .timeIntervalSinceDate(pastDate)
             
             print("\(DurationTime)")
-            
             let userName : String!
             let pwd      : String!
             
@@ -95,14 +96,12 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
                 userName = ""
                 pwd      = ""
             }
-
-            if (DurationTime > 30){
+            if (DurationTime > 10 * 60){
             
                 let jsParamFunc = self.jscontext?.objectForKeyedSubscript("getUserlognin")
                 let userNameAndpwd  = NSDictionary(dictionary: ["userName" : userName,"pwd" : pwd ])
                 let dictString = dictionaryToJson(userNameAndpwd)
                 jsParamFunc?.callWithArguments([dictString])
-            
             }
         }
     }
@@ -121,67 +120,101 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
         return currentDate
     }
     
+   
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        if(!_isNetOK){
+            
+            //没有网的情况下显示
+            
+            CenterAlertView.hidden = false
+        }
     }
     
     override func netstateschanged(usableordisusable: Bool) {
         super.netstateschanged(usableordisusable)
         
+
         if (usableordisusable){
-            _isNetOK = true
+            
+             _isNetOK = true
+            
+           
         }else{
             _isNetOK = false
             CNHUD.showHUD("网络异常，请检查网络设置！", duration: 1.5)
         }
     }
+    
     //创建WebView
     func creatWebView(){
         
         webView = UIWebView(frame: CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.height - 20))
-        
         webView.backgroundColor = UIColor.whiteColor()
         webView.userInteractionEnabled = true
         webView.scalesPageToFit = false
         webView.scrollView.bounces = false
         webView.delegate = self
-        
         self.view .addSubview(webView)
         
-//        
-//        let btn = UIButton()
-//        btn.frame = CGRectMake(100, 100, 100, 100)
-//        btn.backgroundColor = UIColor.redColor()
-//        btn.addTarget(self, action: "dddd", forControlEvents: UIControlEvents.TouchUpInside)
-//        self.view.addSubview(btn)
-//        
+         loadingHTML()
         
         
+        //加载失败，请连接网络
+        CenterAlertView = UIView(frame: CGRectMake(0, (self.view.frame.size.height - 60) / 2 , self.view.frame.size.width, 60))
+        CenterAlertView.backgroundColor = UIColor.whiteColor()
+        CenterAlertView.hidden = true
+        self.view.addSubview(CenterAlertView)
         
-        loadingHTML()
+        let alertLabel = UILabel(frame: CGRectMake(0, 0 , self.view.frame.size.width, 30))
+        alertLabel.textAlignment = NSTextAlignment.Center
+        alertLabel.textColor = UIColor.blackColor()
+        alertLabel.font = UIFont.systemFontOfSize(16)
+        alertLabel.text = "加载失败，请连接网络"
+        alertLabel.backgroundColor = UIColor.whiteColor()
+        CenterAlertView.addSubview(alertLabel)
         
-        
-        //大菊花的创建
+        let reloadBtn = UIButton()
+        reloadBtn.frame = CGRectMake(self.view.frame.size.width / 2 - 70 / 2 , 30, 70, 30)
+        reloadBtn.backgroundColor = UIColor.whiteColor()
+        reloadBtn.setTitle("重新加载", forState: UIControlState.Normal)
+        reloadBtn.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        reloadBtn.titleLabel?.font = UIFont.systemFontOfSize(16)
+        reloadBtn.addTarget(self, action: "reloadHTML", forControlEvents: UIControlEvents.TouchUpInside)
+        reloadBtn.layer.borderWidth = 1
+        reloadBtn.layer.cornerRadius = 5
+        CenterAlertView.addSubview(reloadBtn)
 
     }
     
 
-    func dddd(){
-    
+    /**
+     重新加载 按钮的点击事件！
+     */
+    func reloadHTML(){
+        
         loadingHTML()
+        
+        //判断网络是不是成功，成功的话隐藏提示
+        if(_isNetOK){
+            
+            CenterAlertView.hidden = true
+            
+        }
+        
         
     }
     
     
+    
+    /**
+     加载HTML
+     */
     func loadingHTML(){
 
-        //http://192.168.1.39:9998/pda/
-        //http://192.168.1.39:1000/pda/Default.aspx
-        
-        //    正式：http://183.62.9.226:2001
-        //    测试：http://183.62.9.226:2002
-        
         let url : NSURL!
+        //判断用户名是否存在，如果有就拼在URL后面，没有就不用拼
         if(NSUserDefaults.standardUserDefaults().objectForKey("userName") != nil){
             
             let userName =  NSUserDefaults.standardUserDefaults().objectForKey("userName") as! String
@@ -200,7 +233,6 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
         //        NSURLCache .sharedURLCache().removeAllCachedResponses()
         //        NSURLCache.sharedURLCache().diskCapacity = 0
         //        NSURLCache.sharedURLCache().memoryCapacity = 0
-        
         webView.loadRequest(urlRequest)
     }
     
@@ -210,7 +242,8 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
     func timerMethod(){
         
         timer.invalidate()
-        
+    
+        //判断HUD是不是nil
         if HUD != nil {
             HUD.hide(true)
         }
@@ -221,35 +254,40 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
     func webViewDidStartLoad(webView: UIWebView) {
         
         if HUD == nil {
-        
             HUD = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
             HUD.mode = MBProgressHUDMode.Indeterminate
             HUD.labelText = "顾客为先 快速高效"
             HUD.removeFromSuperViewOnHide = true
-            
             timer = NSTimer.scheduledTimerWithTimeInterval(20, target: self, selector: "timerMethod", userInfo: nil, repeats: false)
         }
+        //判断网络是不是👌，如果OK隐藏HUD
         if _isNetOK {
             
             HUD.show(true)
             
         }else{
+            
             CNHUD.showHUD("网络异常，请检查网络设置！", duration: 1.5)
         }
     }
+    
+    
+    
+    
+    
     //MRAK-- UIWebViewdelegate
     func webViewDidFinishLoad(webView: UIWebView) {
+        
         
         timer.invalidate()
         if HUD != nil {
             HUD.hide(true)
         }
         HUD = nil
+        
 //    webView.stringByEvaluatingJavaScriptFromString("document.documentElement.style.webkitUserSelect='none';")
         
-        
        //HUD.hide(true)
-        
         
         if(isCallJS == "1" ){
             // 初始化model
@@ -267,36 +305,75 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
         }
     }
     
+    
     func webView(webView: UIWebView, didFailLoadWithError error: NSError?){
 
+        
         timer.invalidate()
         if HUD != nil {
             HUD.hide(true)
         }
         HUD = nil
-    
-        
+
 //        webView.stringByEvaluatingJavaScriptFromString("getUserlognin")
         
     }
     
     //MARK: JSAndSwiftModdleDelegate
+    //var pingHelper: PingNetTool?
     func JSCallSwiftWithDict(params : NSString) {
         
+//        print(params)
         
-        let paramsDic = parseJSONStringToNSDictionary(params as String)
+        
+        //这里的东西一定不要忘记删除....这个方法是有问题的！
+//       _ = PingNetTool(PingNet: {[weak self](resultString) -> Void in
+//            
+//            if resultString == "0"{
+//                
+//                CNHUD.hidHUD()
+//                CNHUD.showHUD("网络异常，请检查网络设置！", duration: 1.5)
+//                
+//                print("PingTool 走了没有网络+++")
+//                
+//                return
+//            }else{
+//
+//                print("PingTool 走了有网络---")
+//                self!.callJSWith(params)
+//            }
+//        })
+        
+        if(checkNetworkStatus()){
+        
+            callJSWith(params)
+        }else{
+            
+            CNHUD.hidHUD()
+            CNHUD.showHUD("网络异常，请检查网络设置！", duration: 1.5)
 
+            return
+        
+        }
+        
+        
+    }
+    
+    func callJSWith(params : NSString){
+        
+    
+        let paramsDic = parseJSONStringToNSDictionary(params as String)
+        
         let type = paramsDic.objectForKey("type") as! String
         
         if type == "0" {
-//            self.locationManager.stopUpdatingLocation()
-            print("定位")
             
+            print("定位")
             action()
         }else if (type == "1"){
-
+            
             print("拍照")
-             SystemCamera()
+            SystemCamera()
         }else if (type == "3" ){
             
             let number = paramsDic.objectForKey("number") as! String
@@ -304,7 +381,7 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
             let tel = "telprompt://" + number
             //从这拨打电话
             UIApplication.sharedApplication().openURL(NSURL(string: tel)!)
-        
+            
         }else if (type == "4"){
             
             let userName = paramsDic.objectForKey("userName") as! String
@@ -316,25 +393,28 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
         }else if (type == "5"){
             SwiftCallJSMarkAndId()
         }
-        
+    
+    
     }
+    
+    
+    
     
    
     // 定位
     func action(){
 
-
-//
-//        CNHUD.hidHUD()
-//        CNHUD.showHUD("正在定位请稍后...")
-        
-        if(!checkNetworkStatus()){
-            CNHUD.hidHUD()
-            CNHUD.showHUD("网络异常，请检查网络设置！", duration: 1.5)
-            
-            return
-        }
+       
+//        if(!_isNetOK){
+//            CNHUD.hidHUD()
+//            CNHUD.showHUD("网络异常，请检查网络设置！", duration: 1.5)
+//            return
+//        }else{
+//            
+//            
 //        
+//        }
+//
 //        if CLLocationManager.locationServicesEnabled() && CLLocationManager.authorizationStatus() != CLAuthorizationStatus.Denied && CLLocationManager.authorizationStatus() != CLAuthorizationStatus.Restricted {
 //            
 //            locationManager.requestLocationWithReGeocode(true) { [weak self](location : CLLocation!,regeocode : AMapLocationReGeocode!, error : NSError!) -> Void in
@@ -376,8 +456,7 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
 //        let latitude = String(format: "%.6f", coordinate.latitude)
 //        let longitude = String(format: "%.6f", coordinate.longitude)
 //        SwiftCallJSLocation(latitude, longitude: longitude, positionInfo:"ddd",status: "1")
-
-//        
+        
         if coordinate != nil {
         
             reGeoSearch(coordinate)
@@ -392,8 +471,7 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
              self.SwiftCallJSLocation("", longitude: "", positionInfo:"",status: "0")
             
             locationManager.startUpdatingLocation()
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-        
+            
     }
     
     }
@@ -413,12 +491,11 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
     func onReGeocodeSearchDone(request: AMapReGeocodeSearchRequest!, response: AMapReGeocodeSearchResponse!) {
         
         if(response.regeocode != nil){
-            
             print("+++\(response.regeocode.formattedAddress)")
             print(currentCoordinate)
             
-            let latitude = String(format: "%f", currentCoordinate.latitude)
-            let longitude = String(format: "%f", currentCoordinate.longitude)
+            let latitude = String(format: "%.6f", currentCoordinate.latitude)
+            let longitude = String(format: "%.6f", currentCoordinate.longitude)
         
             self.SwiftCallJSLocation(latitude, longitude: longitude, positionInfo:response.regeocode.formattedAddress,status: "1")
             
@@ -448,7 +525,6 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
             Alert.addAction(okAction)
             
             self.presentViewController(Alert, animated: true, completion: nil)
-            
             print("没有打开相机")
             
             return
@@ -464,10 +540,9 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
             picker.delegate = self
             picker.sourceType = sourceType
             self.presentViewController(picker, animated: true, completion: nil)
+            
         }
     }
-    
-    
     //相册回调方法;
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         
@@ -548,10 +623,10 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
         let jsParamFunc = self.jscontext?.objectForKeyedSubscript("\(getlocationInfo)")
         locationDic = NSDictionary(dictionary: ["latitude" : latitude,"longitude" : longitude,"positionInfo" : positionInfo,"status" : status,"IMEI" : adUUID,"DeviceVersion" : Mark])
         let dictString = dictionaryToJson(locationDic)
+        
         jsParamFunc?.callWithArguments([dictString])
 //        self.webView.stopLoading()
 //        self.webView.loadRequest(NSURLRequest(URL: NSURL(string: "www.baidu.com")!))
-        
     }
     /**Swift调用JS--照片连接*/
     func SwiftCallJSCamera(imgUrl : String, result : String){
@@ -566,7 +641,6 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
     func SwiftCallJSMarkAndId(){
         
         let adUUID = getUUID()
-    
         let Mark = getDeviceVersion()
         var sss = "0"
         if((adUUID as NSString).length > 0 && (Mark as NSString).length > 0){
@@ -652,11 +726,12 @@ class ViewController: BaseViewController,UIWebViewDelegate,UIImagePickerControll
         let jsParamFunc = self.jscontext?.objectForKeyedSubscript("getUserGroundInfo2")
         let dictString = dictionaryToJson(locationDic)
         jsParamFunc?.callWithArguments([dictString])
+        
     }
+    
     deinit{
         
         NSNotificationCenter.defaultCenter().removeObserver(self, name: "tongzhi", object: nil)
-        
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIApplicationDidBecomeActiveNotification, object: nil)
         
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIApplicationWillResignActiveNotification, object: nil)
